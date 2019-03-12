@@ -1,0 +1,51 @@
+<link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
+<link href="//apps.bdimg.com/libs/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+
+
+<script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/utils.js') }}"></script>
+
+<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<div>
+用户id：{{handle}}
+</div>
+<div>
+用户水平评估：{{real_rating}}
+</div>
+
+根据用户错误率较高类型的题目进行推荐：
+<table border="1">
+  <tr>
+    <th>题目id</th>
+    <th>题目标签</th>
+  </tr>
+  {% for problem in  commend_problem_highest_error_rate_set %}
+  <tr>
+  
+    <td><a href="http://codeforces.com/problemset/problem/{{problem.get('contestId')}}/{{problem.get('index')}}">{{problem.get('contestId') }}{{problem.get('index') }}</a></td>
+    <td>{{problem.get('tags') }}</td>
+   
+  </tr>
+   {% endfor %}
+</table>
+
+推荐用户没有接触过的类型的题目：
+<table border="1">
+  <tr>
+    <th>题目id</th>
+    <th>题目标签</th>
+  </tr>
+  {% for problem in  commend_problem_untouch_set %}
+  <tr>
+  
+    <td><a href="http://codeforces.com/problemset/problem/{{problem.get('contestId')}}/{{problem.get('index')}}">{{problem.get('contestId') }}{{problem.get('index') }}</a></td>
+    <td>{{problem.get('tags') }}</td>
+   
+  </tr>
+   {% endfor %}
+</table>
+
+
+
+
